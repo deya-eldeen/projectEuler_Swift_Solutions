@@ -22,3 +22,75 @@ print(sum)
 >>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 >
 >By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued >terms.
+
+```
+import Foundation
+
+func solution2_recursive()
+{
+    func fibonacci(number: Int) -> (Int)
+    {
+        if number <= 1
+        {
+            return number
+        }
+        else
+        {
+            return fibonacci(number - 1) + fibonacci(number - 2)
+        }
+    }
+    var sum = 0
+    print("calculating...")
+    for index in 2..<50
+    {
+        print (index)
+        let f = fibonacci(index)
+        
+        if( f < 4000000)
+        {
+            if (f % 2 == 0)
+            {
+                sum += f
+            }
+        }
+        else
+        {
+            print(sum)
+            return
+        }
+    }
+}
+
+
+func solution2()
+{
+    var phiOne : Double = (1.0 + sqrt(5.0)) / 2.0
+    var phiTwo : Double = (1.0 - sqrt(5.0)) / 2.0
+
+    func findFibonacciNumber (nthNumber : Double) -> Int64
+    {
+        let nthNumber : Double = (pow(phiOne, nthNumber) - (pow(phiTwo, nthNumber))) / sqrt(5.0)
+        return Int64(nthNumber)
+    }
+
+    var sum : Int64 = 0
+    
+    print("calculating...")
+    for index in 2..<50
+    {
+        let f = findFibonacciNumber(Double(index))
+        if(f < 4000000)
+        {
+            if (f % 2 == 0)
+            {
+                sum += f
+            }
+        }
+        else
+        {
+            print(sum)
+            return
+        }
+    }
+}
+```
